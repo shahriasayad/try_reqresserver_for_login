@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:tryreqres_server/controller/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,6 +11,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  LoginController controller = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextFormField(
+              controller: controller.emailController.value,
               decoration: const InputDecoration(
                 labelText: "Email",
                 border: OutlineInputBorder(),
@@ -35,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextFormField(
+              controller: controller.passwordController.value,
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: "Password",
@@ -44,7 +51,9 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              controller.LoginApi();
+            },
             child: Text(
               "LOG IN",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
